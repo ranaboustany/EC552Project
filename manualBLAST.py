@@ -1,16 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Apr 23 19:58:28 2022
-
 @author: ranaboustany
 """
-
-#Inport libraries
-import pandas as pd
-
-#set up database of bacteria sequences as db
-db = pd.DataFrame()
 
 def makeLonger(s,l):
     """makes a sequence s longer by adding dashes to trailing space"""
@@ -49,6 +41,30 @@ def compareSeqs(s1,s2):
             mismatch += 1
     
     return mismatch
+
+def main():
+    #Inport libraries
+    import pandas as pd
+
+    #set up database of bacteria sequences as db as pandas dataframe df
+    db_df = pd.read_csv("bacteria_db_test.csv")
+
+    # read the protein sequences file into pandas dataframe
+    seq_df = pd.read_csv("protein_seq_test.csv")
+    
+    for i in seq_df.index: # i indexes possible protein sequences
+        for j in db_df.index: # j indexes bacteria database 
+            s1 = seq_df['sequence'][i]
+            s1_ID = seq_df['ID'][i]
+            s2 = db_df['sequence'][j]
+            s2_ID = db_df['ID'][j]
+            mm = compareSeqs(s1,s2)
+            print("Protein", s1_ID, "sequence: ", s1, "and \nBacteria", s2_ID, "sequence:", s2, "\nhave", mm, "mismatches\n")
+    
+    
+    
+if __name__ == "__main__":
+    main()
         
         
         
