@@ -1,7 +1,0 @@
-Methionine
-Leucine
-Serine
-Proline
-Isoleucine
-Glycine
-TerminationCodon
